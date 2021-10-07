@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs')
-const nodemailer = require("nodemailer");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,37 +27,14 @@ router.post('/submit',function(req,res){
     if(e){
       console.log(e)
     }
-
-    var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'webdevck121.1@gmail.com',
-        pass: 'ASProcks123'
-      }
-    });
-
-    
-    var mailOptions = {
-      from: 'ratedr@gmail.com',
-      to: req.body.email,
-      subject: 'Successfully Tickets Booked',
-      text: 'Congratulation you have successfully booked the ticket for the upcoming event'
-    };
-
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-       res.render('success')
-      }
-    });
-
-  
+    else{
+      res.render('success')
+    }
   })
 })
 
-router.get('/submit',(req,res)=>{
-  res.render('success')
-})
+
 
 module.exports = router;
+
+
